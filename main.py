@@ -13,11 +13,12 @@ load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY")
 
 if len(sys.argv) == 1:
-    print("please enter a prompt")
-    sys.exit(1)
-
-user_prompt = sys.argv[1]
-verbose = "--verbose" in sys.argv  
+    user_prompt = "Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum."
+    verbose = False
+    print("No prompt provided — using default: Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum.")
+else:
+    user_prompt = sys.argv[1]
+    verbose = "--verbose" in sys.argv
 
 system_prompt = """
 You are a helpful AI coding agent.
@@ -46,7 +47,7 @@ messages = [
     types.Content(role="user", parts=[types.Part(text=user_prompt)])
 ]
 response = client.models.generate_content(
-    model="gemini-2.0-flash-001", contents=messages, config=types.GenerateContentConfig(tools=[available_functions], system_instruction=system_prompt)
+    model="gemini-2.5-flash", contents=messages, config=types.GenerateContentConfig(tools=[available_functions], system_instruction=system_prompt)
 )
 
 def main():
@@ -55,7 +56,7 @@ def main():
     for i in range(max_iterations):
         try:
             response = client.models.generate_content(
-                model="gemini-2.0-flash-001",
+                model="gemini-2.5-flash",
                 contents=messages,
                 config=types.GenerateContentConfig(
                     tools=[available_functions],
