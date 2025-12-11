@@ -46,14 +46,16 @@ git clone https://github.com/wldn-kim/aiagent
 cd <project-directory>
 ```
 2. Install dependencies
-`pip install -r requirements.txt`
-
+```
+pip install -r requirements.txt
+```
 Required packages include:
--google-genai
--python-dotenv
+- google-genai
+- python-dotenv
 
 3. Add your Gemini API key
 
-Create a ```.env``` file:
-
-```GEMINI_API_KEY=your_api_key_here```
+Create a `.env` file:
+```
+GEMINI_API_KEY=your_api_key_here
+```
